@@ -1,21 +1,37 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
-    home-manager.url = "github:nix-community/home-manager/release-22.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
-    nixosConfiguration = {
+  outputs = inputs@{ nixpkgs, home-manager, hyprland, ... }: {
+    nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
-        system = "x_86_64-linux";
+        system = "x86_64-linux";
 	modules = [
-          ./machines/laptop/configuration.nix
+          ./machines/laptop
+	  hyprland.nixosModules.default 
+          {
+            programs.hyprland.enable = true;
+          }
 	  home-manager.nixosModules.home-manager
 	  {
-            home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-	    home-manager.users.nervousfish = import ./users/common/home.nix;
+	    home-manager = {
+              useGlobalPkgs = true;
+	      useUserPackages = true;
+	      users.nervousfish = {
+	        imports = [
+	          hyprland.homeManagerModules.default
+	          ./common/home
+                ];
+              };
+	    };
 	  }
 	];
       };

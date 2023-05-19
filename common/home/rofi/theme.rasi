@@ -1,0 +1,138 @@
+// Global //
+
+* {
+    font: "FiraCode Mono Nerd Font 12";
+    foreground: #f8f8f2;
+    background-color: #282a3696;
+    active-background: #6272a4;
+    urgent-background: #ff5555;
+    urgent-foreground: #282a36;
+    selected-background: @active-background;
+    selected-urgent-background: @urgent-background;
+    selected-active-background: @active-background;
+    separatorcolor: @active-background;
+    bordercolor: @active-background;
+    separatorcolor:              transparent;
+    border-radius:               0px;
+    border:                      0px;
+    spacing:                     0px;
+    padding:                     0px;
+    height : 45%;
+    width : 45%;
+}
+
+
+// Main //
+window {
+    transparency:                "real";
+    fullscreen:                  false;
+    enabled:                     true;
+    cursor:                      "default";
+    spacing:                     0px;
+    padding:                     0px;
+    border:                      2px;
+    border-radius:               40px;
+    border-color:                @border-color;
+    background-color:            transparent;
+}
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    orientation:                 horizontal;
+    children:                    [ "inputbar", "listbox" ];
+    background-color:            transparent;
+    background-image: 		 url("./assets/placeholder.jpg", height);
+}
+
+// Inputs //
+inputbar {
+    enabled:                 	 false;
+    children:                    [ "entry" ];
+    background-color:            transparent;
+}
+entry {
+    enabled:                     false;
+}
+
+// Lists //
+listbox {
+    spacing:                     10px;
+    padding:                     30px;
+    children:                    [ "listview" ];
+    background-color:            @background-color;
+}
+listview {
+    enabled:                     true;
+    columns:                     1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    cursor:                      "default";
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
+
+// Elements //
+element {
+    enabled:                     true;
+    spacing:                     30px;
+    padding:                     8px;
+    border-radius:               20px;
+    cursor:                      pointer;
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+#element.normal.normal {
+    background-color: transparent;
+    text-color:       @foreground;
+}
+#element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+#element.normal.active {
+    background-color: @active-background;
+    text-color:       @foreground;
+}
+#element.selected.normal {
+    background-color: @selected-background;
+    text-color:       @foreground;
+}
+#element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @foreground;
+}
+#element.selected.active {
+    background-color: @selected-active-background;
+    text-color:       @foreground;
+}
+#element.alternate.normal {
+    background-color: transparent;
+    text-color:       @foreground;
+}
+#element.alternate.urgent {
+    background-color: @urgent-background;
+    text-color:       @foreground;
+}
+#element.alternate.active {
+    background-color: @active-background;
+    text-color:       @foreground;
+}
+element-icon {
+    size:                        48px;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    cursor:                      inherit;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
