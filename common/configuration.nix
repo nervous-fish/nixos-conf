@@ -87,6 +87,7 @@
     slurp
     swappy
     libsForQt5.dolphin
+    obs-studio
     wl-clipboard
     pavucontrol
     firefox
