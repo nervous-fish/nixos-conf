@@ -16,6 +16,8 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
+  virtualisation.libvirtd.enable = true;
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
@@ -97,6 +99,7 @@
     libsForQt5.qt5ct
     qt6.qtwayland
     libva
+    virt-manager
   ];
 
   services.pipewire = {
