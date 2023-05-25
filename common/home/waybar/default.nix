@@ -6,7 +6,7 @@
       mainBar = { 
         layer = "top";
         position = "top";
-        height = 24;
+        height = 12;
         modules-left = [
         ];
         modules-center = [
@@ -81,6 +81,12 @@
       #window {
           font-weight: bold;
           font-family: "Ubuntu";
+      }
+
+      .modules-right {
+        margin-top: 4px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 7px;
       }
 
       #mode {
