@@ -100,6 +100,9 @@
     qt6.qtwayland
     libva
     virt-manager
+    pamixer
+    brightnessctl
+    which
   ];
 
   services.pipewire = {

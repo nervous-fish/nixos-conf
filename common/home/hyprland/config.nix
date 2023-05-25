@@ -193,6 +193,12 @@
     # Scroll through existing workspaces with mainMod + scroll
     bind = $mainMod, mouse_down, workspace, e+1
     bind = $mainMod, mouse_up, workspace, e-1
+ 
+    bind = , XF86AudioRaiseVolume, exec, pamixer -i 5
+    bind = , XF86AudioLowerVolume, exec, pamixer -d 5
+    bind = , XF86AudioMute, exec, pamixer -m
+    bind = , XF86MonBrightnessUp, exec, brightnessctl set 10%+
+    bind = , XF86MonBrightnessDown, exec, brightnessctl set 10%-
 
     # Move/resize windows with mainMod + LMB/RMB and dragging
     bindm = $mainMod, mouse:272, movewindow
