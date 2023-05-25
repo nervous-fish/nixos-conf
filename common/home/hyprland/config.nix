@@ -133,9 +133,9 @@
     windowrulev2 = opacity 0.90 0.90,class:^(Alacritty)$
     
     windowrulev2 = float,class:^(firefox)$,title:^(Library)$
-    windowrulev2 = float,class:^(org.kde.dolphin)$
     windowrulev2 = float,class:^(org.kde.polkit-kde-authentication-agent-1)$
     windowrulev2 = float,class:^(pavucontrol)$
+    windowrulev2 = float,class:^(org.gnome.Nautilus)$
 
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
     $mainMod = SUPER

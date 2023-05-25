@@ -88,7 +88,6 @@
     grim
     slurp
     swappy
-    libsForQt5.dolphin
     obs-studio
     wl-clipboard
     pavucontrol
@@ -103,6 +102,7 @@
     pamixer
     brightnessctl
     which
+    gnome.nautilus
   ];
 
   services.pipewire = {
