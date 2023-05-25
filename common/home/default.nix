@@ -12,7 +12,7 @@
     ./swaylock
     ./waybar
     ./wlogout
-    ./zsh
+    ./fish
   ];
 
   programs.home-manager.enable = true;
