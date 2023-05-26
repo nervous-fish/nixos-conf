@@ -21,13 +21,13 @@
 
     ### Geometry ###
 
-    # dynamic width from 0 to 300
-    # width = (0, 300)
-    # constant width of 300
-    width = 300
+    # dynamic width from 0 to n
+    width = (0, 450)
+    # constant width of n
+    # width = 300
 
     # The maximum height of a single notification, excluding the frame.
-    height = 300
+    height = 100
 
     # Position the notification in the top right corner
     origin = top-right
@@ -73,7 +73,9 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 1
+    #separator_height = 0
+
+    gap_size = 10
 
     # Padding between text and separator.
     padding = 8
@@ -168,7 +170,7 @@
 
     # Specify where to make an ellipsis in long lines.
     # Possible values are "start", "middle" and "end".
-    ellipsize = middle
+    ellipsize = end
 
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
@@ -195,9 +197,6 @@
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 64
 
-    # Paths to default icons.
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-
     ### History ###
 
     # Should a notification popped up from history be sticky or timeout
@@ -208,12 +207,6 @@
     history_length = 20
 
     ### Misc/Advanced ###
-
-    # dmenu path.
-    dmenu = /usr/bin/dmenu -p dunst:
-
-    # Browser for opening urls in context menu.
-    browser = /usr/bin/firefox -new-tab
 
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
@@ -229,7 +222,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 0
+    corner_radius = 4
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
