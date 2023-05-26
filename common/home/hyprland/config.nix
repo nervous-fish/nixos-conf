@@ -8,7 +8,7 @@
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
     # Execute your favorite apps at launch
-    exec-once = hyprpaper & waybar
+    exec-once = hyprpaper & waybar & avizo-service
 
     # Source a file (multi-file configs)
     # source = ~/.config/hypr/myColors.conf
@@ -194,11 +194,11 @@
     bind = $mainMod, mouse_down, workspace, e+1
     bind = $mainMod, mouse_up, workspace, e-1
  
-    bind = , XF86AudioRaiseVolume, exec, pamixer -i 5
-    bind = , XF86AudioLowerVolume, exec, pamixer -d 5
-    bind = , XF86AudioMute, exec, pamixer -m
-    bind = , XF86MonBrightnessUp, exec, brightnessctl set 10%+
-    bind = , XF86MonBrightnessDown, exec, brightnessctl set 10%-
+    bind = , XF86AudioRaiseVolume, exec, volumectl -u up
+    bind = , XF86AudioLowerVolume, exec, volumectl -u down
+    bind = , XF86AudioMute, exec, volumectl toggle-mute
+    bind = , XF86MonBrightnessUp, exec, lightctl up
+    bind = , XF86MonBrightnessDown, exec, lightctl down
 
     # Move/resize windows with mainMod + LMB/RMB and dragging
     bindm = $mainMod, mouse:272, movewindow
