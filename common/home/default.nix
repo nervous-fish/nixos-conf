@@ -3,6 +3,7 @@
 {
   imports = [
     ./alacritty
+    ./avizo
     ./dunst
     ./git
     ./hyprland
