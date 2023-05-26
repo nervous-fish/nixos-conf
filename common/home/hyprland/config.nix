@@ -65,7 +65,7 @@
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         rounding = 10
         blur = true
-        blur_size = 5
+        blur_size = 8
         blur_passes = 5
         blur_new_optimizations = true
         multisample_edges = true
