@@ -84,7 +84,7 @@
 
       .modules-right {
         margin-top: 4px;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.8);
         border-radius: 7px;
       }
 
