@@ -6,7 +6,6 @@
       mainBar = { 
         layer = "top";
         position = "top";
-        height = 12;
         modules-left = [
         ];
         modules-center = [
