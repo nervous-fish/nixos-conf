@@ -32,7 +32,7 @@
           format = "{}% ";
         };
         battery = {
-          bat = "BAT0";
+          bat = "BAT1";
           states = {
             warning = 30;
             critical = 15;
