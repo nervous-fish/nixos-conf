@@ -41,7 +41,7 @@ mainbox {
     orientation:                 horizontal;
     children:                    [ "inputbar", "listbox" ];
     background-color:            transparent;
-    background-image: 		 url("./assets/placeholder.jpg", height);
+    background-image: 		 url("./assets/background.png", width);
 }
 
 // Inputs //
