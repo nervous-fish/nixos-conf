@@ -79,7 +79,6 @@
   environment.systemPackages = with pkgs; [
     coreutils
     xdg-utils
-    discordo
     discord
     vscode-with-extensions
     teams
