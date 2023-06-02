@@ -78,6 +78,8 @@
     discord
     vscode-with-extensions
     teams
+    libsForQt5.qt5.qtwayland
+    qt6.qtwayland
     libreoffice-qt
     git
     grim
@@ -89,15 +91,11 @@
     firefox
     hyprpaper
     unzip
-    libsForQt5.qt5.qtwayland
-    libsForQt5.qt5ct
-    qt6.qtwayland
     libva
-    virt-manager
     pamixer
     brightnessctl
     which
-    gnome.nautilus
+    cinnamon.nemo
   ];
 
   services.pipewire = {
