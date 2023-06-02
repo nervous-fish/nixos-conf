@@ -136,6 +136,7 @@
     windowrulev2 = float,class:^(org.kde.polkit-kde-authentication-agent-1)$
     windowrulev2 = float,class:^(pavucontrol)$
     windowrulev2 = float,class:^(org.gnome.Nautilus)$
+    windowrulev2 = float,title:^(Open)
 
     # See https://wiki.hyprland.org/Configuring/Keywords/ for more
     $mainMod = SUPER
