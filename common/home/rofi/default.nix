@@ -13,6 +13,4 @@
     };
     theme = ./theme.rasi;
   };
-
-  home.file."${config.xdg.configHome}/rofi/assets".source = ./assets;
 }

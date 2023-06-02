@@ -4,7 +4,7 @@
     font: "FiraCode Mono Nerd Font 12";
     foreground: #f8f8f2;
     background-color: #282a3696;
-    active-background: #6272a4;
+    active-background: #bd93f9;
     urgent-background: #ff5555;
     urgent-foreground: #282a36;
     selected-background: @active-background;
@@ -41,7 +41,6 @@ mainbox {
     orientation:                 horizontal;
     children:                    [ "inputbar", "listbox" ];
     background-color:            transparent;
-    background-image: 		 url("./assets/background.png", width);
 }
 
 // Inputs //

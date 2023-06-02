@@ -38,8 +38,8 @@
       }
 
       button {
-          color: #b4befe;
-              background-color: #313244;
+          color: #6272a4;
+              background-color: #282a36;
               outline-style: none;
               border: none;
               border-width: 0px;
@@ -53,7 +53,7 @@
       }
 
       button:focus#lock {
-              background-color: #44475a;
+              background-color: #bd93f9;
               background-size: 25%;
               margin-right : 30px;
               margin-bottom : 30px;
@@ -63,7 +63,7 @@
       }
 
       button:focus#logout {
-              background-color: #44475a;
+              background-color: #bd93f9;
               background-size: 25%;
               margin-right : 30px;
               margin-top : 30px;
@@ -73,7 +73,7 @@
       }
 
       button:focus#shutdown {
-              background-color: #44475a;
+              background-color: #bd93f9;
               background-size: 25%;
               margin-left : 20px;
               margin-bottom : 30px;
@@ -83,7 +83,7 @@
       }
 
       button:focus#reboot {
-              background-color: #44475a;
+              background-color: #bd93f9;
               background-size: 25%;
               margin-left : 30px;
               margin-top : 30px;
