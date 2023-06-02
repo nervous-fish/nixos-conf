@@ -6,6 +6,7 @@
     ./avizo
     ./dunst
     ./git
+    ./gtk
     ./hyprland
     ./neovim
     ./rofi
