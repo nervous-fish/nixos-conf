@@ -195,8 +195,8 @@
     bind = $mainMod, mouse_down, workspace, e+1
     bind = $mainMod, mouse_up, workspace, e-1
  
-    bind = , XF86AudioRaiseVolume, exec, volumectl -u up
-    bind = , XF86AudioLowerVolume, exec, volumectl -u down
+    bind = , XF86AudioRaiseVolume, exec, volumectl -u up 10
+    bind = , XF86AudioLowerVolume, exec, volumectl -u down 10
     bind = , XF86AudioMute, exec, volumectl toggle-mute
     bind = , XF86MonBrightnessUp, exec, lightctl up
     bind = , XF86MonBrightnessDown, exec, lightctl down
