@@ -150,7 +150,7 @@
     bind = $mainMod, E, exec, nautilus
     bind = $mainMod, return, exec, alacritty
     bind = $mainMod, F, exec, firefox
-    bind = $mainMod, backspace, exec, wlogout -b 2 -c 0 -r 0 -L 555 -R 555  -T 300 -B 300 --protocol layer-shell
+    bind = $mainMod, backspace, exec, pidof wlogout || wlogout -b 2 -c 0 -r 0 -L 555 -R 555  -T 300 -B 300 --protocol layer-shell
     bind = $mainMod, L, exec, swaylock
     bindr = SUPER, SUPER_L, exec, pkill rofi || rofi -show drun
     #bind = $mainMod, tab, exec, rofi -show window
