@@ -147,7 +147,7 @@
     bind = $mainMod, W, togglefloating,
     bind = ALT, return, fullscreen,
 
-    bind = $mainMod, E, exec, dolphin
+    bind = $mainMod, E, exec, nautilus
     bind = $mainMod, return, exec, alacritty
     bind = $mainMod, F, exec, firefox
     bind = $mainMod, backspace, exec, wlogout -b 2 -c 0 -r 0 -L 555 -R 555  -T 300 -B 300 --protocol layer-shell
