@@ -15,6 +15,7 @@
     ./waybar
     ./wlogout
     ./fish
+    ./zellij
   ];
 
   programs.home-manager.enable = true;
