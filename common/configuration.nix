@@ -1,21 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  boot = {
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-	efiSysMountPoint = "/boot/efi";
-      };
-      systemd-boot = {
-        enable = true;
-	consoleMode = "max";
-      };
-    };
-    supportedFilesystems = [ "ntfs" ];
-    kernelPackages = pkgs.linuxPackages_latest;
-  };
-
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
@@ -36,8 +21,6 @@
     LC_TELEPHONE = "fr_FR.UTF-8";
     LC_TIME = "fr_FR.UTF-8";
   };
-
-  console.keyMap = "fr";
  
   nixpkgs.overlays = [
     (self: super: {
@@ -94,6 +77,7 @@
     brightnessctl
     which
     cinnamon.nemo
+    virt-manager
   ];
 
   services.pipewire = {
@@ -102,6 +86,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.enable = true;
+    jack.enable = true;
   }; 
 
   services.greetd = {

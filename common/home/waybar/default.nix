@@ -6,6 +6,7 @@
       mainBar = { 
         layer = "top";
         position = "top";
+        output = "DP-1";
         modules-left = [
         ];
         modules-center = [
