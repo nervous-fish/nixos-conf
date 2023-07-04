@@ -57,12 +57,13 @@
     coreutils
     xdg-utils
     discord
-    vscode-with-extensions
+    vscode-fhs
     teams
     libsForQt5.qt5.qtwayland
     qt6.qtwayland
     libreoffice-qt
     git
+    git-lfs
     grim
     slurp
     swappy
