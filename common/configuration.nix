@@ -63,7 +63,6 @@
     qt6.qtwayland
     libreoffice-qt
     git
-    git-lfs
     grim
     slurp
     swappy
