@@ -11,6 +11,17 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelPatches = [
+    {
+      name = "add-acs-overrides";
+      patch = pkgs.fetchurl {
+        name = "add-acs-overrides.patch";
+        url =
+          "https://aur.archlinux.org/cgit/aur.git/plain/0001-add-acs-overrides.patch?h=linux-vfio&id=1a1a7ab832756f4fc4e93f569d541127e90bcdd3";
+        sha256 = "bdd2a5a56e01e91723907afb40d28bed77b7d5107aba92c85adb3ce6967e713a";
+      };
+    }
+  ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =

@@ -15,6 +15,7 @@
     ./wlogout
     ./fish
     ./zellij
+    ./firefox
   ];
 
   programs.home-manager.enable = true;

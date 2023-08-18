@@ -61,10 +61,10 @@
     bind = $mainMod, 0, workspace, 10
 
     # Move active window to a workspace with mainMod + SHIFT + [0-9]
-    bind = $mainMod SHIFT, 1, movetoworkspace, 1
-    bind = $mainMod SHIFT, 2, movetoworkspace, 2
-    bind = $mainMod SHIFT, 3, movetoworkspace, 3
-    bind = $mainMod SHIFT, 4, movetoworkspace, 4
+    bind = $mainMod SHIFT, 1, movetoworkspace, name:term
+    bind = $mainMod SHIFT, 2, movetoworkspace, name:main
+    bind = $mainMod SHIFT, 3, movetoworkspace, name:web
+    bind = $mainMod SHIFT, 4, movetoworkspace, name:social
     bind = $mainMod SHIFT, 5, movetoworkspace, 5
     bind = $mainMod SHIFT, 6, movetoworkspace, 6
     bind = $mainMod SHIFT, 7, movetoworkspace, 7

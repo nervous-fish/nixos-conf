@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   networking.hostName = "nixos";
@@ -51,11 +51,12 @@
     }; 
   };
 
-  nixpkgs.config.allowUnfree = true;
-  
+  nixpkgs.config.allowUnfree = true;  
+
   environment.systemPackages = with pkgs; [
     coreutils
     xdg-utils
+    netcat
     discord
     vscode-fhs
     teams
@@ -69,16 +70,20 @@
     obs-studio
     wl-clipboard
     pavucontrol
-    firefox
     hyprpaper
     unzip
     libva
     pamixer
+    protonvpn-gui
     brightnessctl
     which
     cinnamon.nemo
     virt-manager
+    psensor 
+    hyprpicker
   ];
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.pipewire = {
     enable = true;
@@ -102,7 +107,7 @@
 
   security.pam.services.swaylock = {};
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
