@@ -24,7 +24,6 @@
     hooks = {
       qemu = {
         hugePages = "${pkgs.writeShellScript "HPHook.sh" ''
-          #!/bin/bash
           VM=$1
           STAGE=$2
           STEP=$3
