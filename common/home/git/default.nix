@@ -4,7 +4,7 @@
   programs.git = {
     enable = true;
     userName = "nervousfish";
-    userEmail = "dev@nervous.fish";
+    userEmail = "119760848+nervous-fish@users.noreply.github.com";
     lfs.enable = true;
   };
 }

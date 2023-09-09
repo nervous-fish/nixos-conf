@@ -87,22 +87,14 @@
 
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.enable = true;
-    jack.enable = true;
   }; 
 
-  services.greetd = {
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm = {
     enable = true;
-    settings = rec {
-      initial_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-  	user = "nervousfish";
-      };
-      default_session = initial_session;
-    };
+    theme = "nosddm";
   };
 
   security.pam.services.swaylock = {};
@@ -114,5 +106,8 @@
   system.stateVersion = "22.11";
 
 
-  imports = [ ./nervousfish.nix ];
+  imports = [ 
+    ./pkgs
+    ./nervousfish.nix
+  ];
 }
