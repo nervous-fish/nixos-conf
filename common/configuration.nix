@@ -1,8 +1,13 @@
 { config, pkgs, lib, ... }:
 
 {
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    networkmanager.wifi.powersave = false;
+    nameservers = [ "1.1.1.1" "9.9.9.9" ];
+    firewall.enable = false;
+  };
 
   security.rtkit.enable = true;
 
@@ -41,11 +46,9 @@
       auto-optimise-store = true;
       builders-use-substitutes = true;
       substituters = [
-        "https://hyprland.cachix.org"
         "https://cache.nixos.org"
       ];
       trusted-public-keys = [
-        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
     }; 
@@ -54,36 +57,22 @@
   nixpkgs.config.allowUnfree = true;  
 
   environment.systemPackages = with pkgs; [
+    barrier
     coreutils
     xdg-utils
     netcat
     discord
     vscode-fhs
-    teams
-    libsForQt5.qt5.qtwayland
-    qt6.qtwayland
     libreoffice-qt
     git
-    grim
-    slurp
-    swappy
     obs-studio
-    wl-clipboard
-    pavucontrol
-    hyprpaper
     unzip
     libva
-    pamixer
     protonvpn-gui
-    brightnessctl
     which
-    cinnamon.nemo
     virt-manager
     psensor 
-    hyprpicker
   ];
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.pipewire = {
     enable = true;
@@ -91,13 +80,13 @@
     wireplumber.enable = true;
   }; 
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm = {
+  services.xserver = {
     enable = true;
-    theme = "nosddm";
+    displayManager.sddm = {
+      enable = true;
+    };
+    desktopManager.plasma5.enable = true;
   };
-
-  security.pam.services.swaylock = {};
 
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })

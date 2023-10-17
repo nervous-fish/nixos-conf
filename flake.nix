@@ -5,21 +5,15 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
-    hyprland.url = "github:hyprwm/Hyprland";
+    }; 
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, hyprland, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 	modules = [
           ./machines/laptop
-	  hyprland.nixosModules.default 
-          {
-            programs.hyprland.enable = true;
-          }
 	  home-manager.nixosModules.home-manager
 	  {
 	    home-manager = {
@@ -27,7 +21,6 @@
 	      useUserPackages = true;
 	      users.nervousfish = {
 	        imports = [
-	          hyprland.homeManagerModules.default
 	          ./common/home
                 ];
               };
@@ -39,10 +32,6 @@
         system = "x86_64-linux";
         modules = [
           ./machines/desktop
-          hyprland.nixosModules.default 
-          {
-            programs.hyprland.enable = true;
-          }
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -50,7 +39,6 @@
               useUserPackages = true;
               users.nervousfish = {
                 imports = [
-                  hyprland.homeManagerModules.default
                   ./machines/desktop/home
                 ];
               };

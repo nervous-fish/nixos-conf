@@ -3,16 +3,9 @@
 {
   imports = [
     ./alacritty
-    ./avizo
-    ./dunst
     ./git
-    ./gtk
     ./neovim
-    ./rofi
     ./starship
-    ./swaylock
-    ./waybar
-    ./wlogout
     ./fish
     ./zellij
     ./firefox

@@ -1,7 +1,6 @@
 { ... }:
 {
   imports = [
-    ./hypr
     ../../../common/home
   ];
 }

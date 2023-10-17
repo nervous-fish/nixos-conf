@@ -2,8 +2,6 @@
 
 {
   programs.alacritty.settings = {
-    window.decorations = "none";
-    window.opacity = 0.0;
     font.normal = {
       family = "FiraCode Nerd Font Mono";
       style = "Regular";
