@@ -72,7 +72,16 @@
     which
     virt-manager
     psensor 
+    gparted
+    qbittorrent
+    looking-glass-client
+    mullvad-vpn
+    ffsend
+    onionshare-gui
+    tor-browser-bundle-bin
   ];
+
+  services.mullvad-vpn.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -87,6 +96,10 @@
     };
     desktopManager.plasma5.enable = true;
   };
+
+  systemd.tmpfiles.rules = [
+    "f /dev/shm/looking-glass 0660 nervousfish qemu-libvirtd -"
+  ];
 
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
