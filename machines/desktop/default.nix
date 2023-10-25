@@ -7,12 +7,6 @@
     ../../common/configuration.nix
   ];
 
-  boot.kernelParams = [
-    "quiet"
-    "iommu=pt"
-    "vfio-pci.ids=10de:1b06,10de:10ef,10ec:8125,1022:43f6"
-    "pcie_acs_override=downstream"
-  ];
 #  systemd.watchdog.rebootTime = "0";
   
   nixpkgs.config.allowUnfree = true;

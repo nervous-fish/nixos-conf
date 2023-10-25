@@ -8,21 +8,41 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelPatches = [
-    {
-      name = "add-acs-overrides";
-      patch = pkgs.fetchurl {
-        name = "add-acs-overrides.patch";
-        url =
-          "https://aur.archlinux.org/cgit/aur.git/plain/0001-add-acs-overrides.patch?h=linux-vfio&id=1a1a7ab832756f4fc4e93f569d541127e90bcdd3";
-        sha256 = "bdd2a5a56e01e91723907afb40d28bed77b7d5107aba92c85adb3ce6967e713a";
-      };
-    }
-  ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];    
+    initrd.preDeviceCommands = ''
+      DEVS="0000:16:00.0"
+
+      for DEV in $DEVS; do
+        echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
+      done
+      modprobe -i vfio-pci
+    '';
+
+    kernelModules = [ "kvm-amd" ];
+    
+    kernelPatches = [
+      {
+        name = "add-acs-overrides";
+        patch = pkgs.fetchurl {
+          name = "add-acs-overrides.patch";
+          url =
+            "https://aur.archlinux.org/cgit/aur.git/plain/0001-add-acs-overrides.patch?h=linux-vfio&id=1a1a7ab832756f4fc4e93f569d541127e90bcdd3";
+          sha256 = "bdd2a5a56e01e91723907afb40d28bed77b7d5107aba92c85adb3ce6967e713a";
+        };
+      }
+    ];
+    
+    kernelParams = [
+      "quiet"
+      "iommu=pt"
+      "vfio-pci.ids=10de:1b06,10de:10ef,1022:43f6"
+      "pcie_acs_override=downstream"
+    ];
+
+    extraModulePackages = [ ];
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/907440f7-0aa2-4e34-af99-056efbe3cc96";
@@ -33,6 +53,18 @@
     { device = "/dev/disk/by-uuid/781D-4308";
       fsType = "vfat";
     };
+  
+  fileSystems."/run/media/nervousfish/nvme1m1p1" = {
+    device = "/dev/disk/by-label/nvme1n1p1";
+  };
+
+  fileSystems."/run/media/nervousfish/nvme2m1p1" = {
+    device = "/dev/disk/by-label/nvme2n1p1";
+  };
+  
+  fileSystems."/run/media/nervousfish/nvme3m1p1" = {
+    device = "/dev/disk/by-label/nvme3n1p1";
+  };
 
   swapDevices = [ ];
 
