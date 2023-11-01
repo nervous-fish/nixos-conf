@@ -58,6 +58,7 @@
 
   environment.systemPackages = with pkgs; [
     barrier
+    vlc
     coreutils
     xdg-utils
     netcat
