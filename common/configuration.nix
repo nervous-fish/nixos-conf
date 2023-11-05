@@ -80,6 +80,7 @@
     ffsend
     onionshare-gui
     tor-browser-bundle-bin
+    yt-dlp
   ];
 
   services.mullvad-vpn.enable = true;
