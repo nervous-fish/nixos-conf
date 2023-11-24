@@ -81,6 +81,7 @@
     onionshare-gui
     tor-browser-bundle-bin
     yt-dlp
+    killall
   ];
 
   services.mullvad-vpn.enable = true;
