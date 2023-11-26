@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+channel=""
+output_folder=""
+wait_range="60-600"
+daily_clips_nb="10"
+
+while [ "$1" != "" ]; do
+    case $1 in
+        --channel-name|-c )     shift
+                                channel=$1
+                                ;;
+        --output-folder|-o )    shift
+                                output_folder=$1
+                                ;;
+        --wait|-w )  		shift
+                                wait_range=$1
+                                ;;
+        * )                     echo "Invalid option: $1"
+                                exit 1
+    esac
+    shift
+done
+
+if [ -z "$channel" ]; then
+    echo "Error: no channel name provided"
+    exit 1
+fi
+
+if [ -z "$output_folder" ]; then
+    echo "Error: no output folder provided"
+    exit 1
+fi
+
+if [ ! -d "$output_folder" ]; then
+    echo "Error: Output folder '$output_folder' does not exist or is not a directory"
+    exit 1
+fi
+
+output_streams="$output_folder/streams"
+mkdir -p $output_streams
+
+yt-dlp -q --no-warnings --wait-for-video "$wait_range" --cookies-from-browser firefox  --output "$output_streams/%(title)s.%(ext)s" "https://www.twitch.tv/$channel"

@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+cleanup() {
+    echo "\nTerminating currently running yt-dlp, pid $yt_dlp_pid..."
+    [[ -n $yt_dlp_pid ]] && kill -SIGTERM $yt_dlp_pid
+    exit 1
+}
+
+trap cleanup SIGINT
+
+channel=""
+alltime_clips_nb="50"
+daily_clips_nb="10"
+output_folder=""
+
+while [ "$1" != "" ]; do
+    case $1 in
+        --channel-name|-c )     shift
+                                channel=$1
+                                ;;
+        --top-all-time-clips )  shift
+                                alltime_clips_nb=$1
+                                ;;
+        --top-daily-clips )     shift
+                                daily_clips_nb=$1
+                                ;;
+        --output-folder|-o )    shift
+                                output_folder=$1
+                                ;;
+        * )                     echo "Invalid option: $1"
+                                exit 1
+    esac
+    shift
+done
+
+if [ -z "$channel" ]; then
+    echo "Error: no channel name provided."
+    exit 1
+fi
+
+if [ -z "$output_folder" ]; then
+    echo "Error: no output folder provided."
+    exit 1
+fi
+
+if [ ! -d "$output_folder" ]; then
+    echo "Error: Output folder '$output_folder' does not exist or is not a directory."
+    exit 1
+fi
+
+output_clips_alltime="$output_folder/clips/alltime"
+output_clips_daily="$output_folder/clips/daily"
+output_vods="$output_folder/vods"
+mkdir -p $output_clips_alltime
+mkdir -p $output_clips_daily
+mkdir -p $output_vods
+
+yt-dlp --output "$output_vods/%(title)s [%(id)s].%(ext)s" "https://www.twitch.tv/$channel/videos" &
+yt_dlp_pid=$!
+wait $yt_dlp_pid
+
+yt-dlp --playlist-end $alltime_clips_nb --output "$output_clips_alltime/%(title)s.%(ext)s" "https://www.twitch.tv/$channel/clips?featured=false&filter=clips&range=all" &
+yt_dlp_pid=$!
+wait $yt_dlp_pid
+
+yt-dlp --playlist-end $daily_clips_nb --output "$output_clips_daily/%(title)s.%(ext)s" "https://www.twitch.tv/$channel/clips?featured=false&filter=clips&range=24hr" &
+yt_dlp_pid=$!
+wait $yt_dlp_pid
+

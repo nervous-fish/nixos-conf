@@ -56,6 +56,8 @@
 
   nixpkgs.config.allowUnfree = true;  
 
+  environment.variables.EDITOR = "nvim";
+
   environment.systemPackages = with pkgs; [
     barrier
     vlc
@@ -82,6 +84,7 @@
     tor-browser-bundle-bin
     yt-dlp
     killall
+    mpv
   ];
 
   services.mullvad-vpn.enable = true;

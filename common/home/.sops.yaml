@@ -1,0 +1,7 @@
+keys:
+  - &nervous-fish age1q0gqs6v447f7ngfnzegh7a8dluj4u8nvfwlqxlpvahpqhjlpr3esgvsmz7
+creation_rules:
+  - path_regex: .*
+    key_groups:
+      - age:
+        - *nervous-fish
