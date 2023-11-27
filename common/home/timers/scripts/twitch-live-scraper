@@ -3,7 +3,6 @@
 channel=""
 output_folder=""
 wait_range="60-600"
-daily_clips_nb="10"
 
 while [ "$1" != "" ]; do
     case $1 in
@@ -40,4 +39,9 @@ fi
 output_streams="$output_folder/streams"
 mkdir -p $output_streams
 
-yt-dlp -q --no-warnings --wait-for-video "$wait_range" --cookies-from-browser firefox  --output "$output_streams/%(title)s.%(ext)s" "https://www.twitch.tv/$channel"
+while true
+do
+	echo "starting to scrape $channel..."
+	yt-dlp -q --no-warnings --wait-for-video "$wait_range" --cookies-from-browser firefox  --output "$output_streams/%(title)s.%(ext)s" "https://www.twitch.tv/$channel"
+	echo "scraping stopped"
+done

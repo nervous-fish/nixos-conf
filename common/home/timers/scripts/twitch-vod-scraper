@@ -55,14 +55,17 @@ mkdir -p $output_clips_alltime
 mkdir -p $output_clips_daily
 mkdir -p $output_vods
 
+echo "scraping vods for $channel..."
 yt-dlp --output "$output_vods/%(title)s [%(id)s].%(ext)s" "https://www.twitch.tv/$channel/videos" &
 yt_dlp_pid=$!
 wait $yt_dlp_pid
 
+echo "scraping alltime clips for $channel..."
 yt-dlp --playlist-end $alltime_clips_nb --output "$output_clips_alltime/%(title)s.%(ext)s" "https://www.twitch.tv/$channel/clips?featured=false&filter=clips&range=all" &
 yt_dlp_pid=$!
 wait $yt_dlp_pid
 
+echo "scraping daily clips for $channel..."
 yt-dlp --playlist-end $daily_clips_nb --output "$output_clips_daily/%(title)s.%(ext)s" "https://www.twitch.tv/$channel/clips?featured=false&filter=clips&range=24hr" &
 yt_dlp_pid=$!
 wait $yt_dlp_pid
