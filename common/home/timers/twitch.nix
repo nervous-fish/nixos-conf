@@ -14,6 +14,9 @@ let
         "-o ${cfg.outputFolder} ";
         KillSignal = "SIGINT"; # yt-dlp only seems to handle SIGINT properly, SIGTERM leaves an incomplete file
       };
+      Install = {
+        WantedBy = ["multi-user.target"];
+      };
     };
   };
 
@@ -35,6 +38,9 @@ let
       };
       Timer = {
         OnCalendar = onCalendar;
+      };
+      Install = {
+        WantedBy = ["timers.target"];
       };
     };
   };
