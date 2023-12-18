@@ -5,7 +5,7 @@
   users.users.nervousfish = {
     isNormalUser = true;
     description = "nervous-fish";
-    extraGroups = [ "audio" "networkmanager" "wheel" "greeter" "libvirtd" ];
+    extraGroups = [ "audio" "networkmanager" "wheel" "greeter" "libvirtd" "docker" ];
     packages = with pkgs; [];
     shell = pkgs.fish;
   };
