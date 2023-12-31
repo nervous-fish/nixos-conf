@@ -11,15 +11,6 @@
 
   virtualisation.docker.enable = true;
 
-  virtualisation.oci-containers.containers.gokapi = {
-    image = "f0rc3/gokapi:latest";
-    ports = [ "53842:53842" ];
-    volumes = [
-      "/run/media/nervousfish/nvme3m1p1/gokapi/data:/app/data"
-      "/run/media/nervousfish/nvme3m1p1/gokapi/config:/app/config"
-    ];
-  };
-
   security.rtkit.enable = true;
 
   time.timeZone = "Europe/Paris";
