@@ -87,6 +87,8 @@
     yt-dlp
     killall
     mpv
+    libratbag
+    piper
   ];
 
   services.mullvad-vpn.enable = true;
@@ -103,6 +105,10 @@
       enable = true;
     };
     desktopManager.plasma5.enable = true;
+  };
+
+  services.ratbagd = {
+    enable = true;
   };
 
   systemd.tmpfiles.rules = [
