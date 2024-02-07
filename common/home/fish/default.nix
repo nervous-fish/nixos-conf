@@ -8,6 +8,7 @@
     shellAliases = {
       nrb = "sudo nixos-rebuild boot --flake";
       nrs = "sudo nixos-rebuild switch --flake";
+      nrt = "sudo nixos-rebuild test --flake";
       ncg = "sudo nix-collect-garbage -d";
       virstart = "virsh --connect qemu:///system start"; 
       virstop = "virsh --connect qemu:///system shutdown";
