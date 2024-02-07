@@ -90,6 +90,17 @@
       };
     };
     supportedFilesystems = [ "ntfs" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_6.override {
+      argsOverride = rec {
+        src = pkgs.fetchurl {
+          url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+          sha256 = "0c5a9agdr27bwd1z6790whczb858z8i34hhn548lzbdylfamf7dj";
+        };
+        version = "6.6.16";
+        modDirVersion = "6.6.16";
+    };
+  });
+
+
   };
 }
