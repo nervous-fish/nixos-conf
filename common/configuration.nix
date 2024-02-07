@@ -123,6 +123,7 @@
 
 
   imports = [ 
+    ./pkgs
     ./nervousfish.nix
   ];
 }
