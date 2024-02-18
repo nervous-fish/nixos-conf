@@ -12,11 +12,6 @@
     };
   };
 
-  sops = {
-    age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/nervousfish"];
-    defaultSopsFile = ./secrets.yaml;
-  };
-
   imports = [
     ./alacritty
     ./git
