@@ -14,6 +14,7 @@
 
   imports = [
     ./alacritty
+    ./direnv
     ./git
     ./neovim
     ./starship
