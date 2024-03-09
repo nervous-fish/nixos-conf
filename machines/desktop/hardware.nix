@@ -37,7 +37,7 @@
     kernelParams = [
       "quiet"
       "iommu=pt"
-      "vfio-pci.ids=10de:1b06,10de:10ef,1022:43f6"
+      "vfio-pci.ids=10de:1b06,10de:10ef,1022:43f6,1022:15b6"
       "pcie_acs_override=downstream"
     ];
 
