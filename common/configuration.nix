@@ -64,6 +64,7 @@
     barrier
     vlc
     coreutils
+    dbeaver
     xdg-utils
     netcat
     discord
