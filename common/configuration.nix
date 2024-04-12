@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, pkgs-unstable, lib, ... }:
 
 {
   networking = {
@@ -60,7 +60,7 @@
 
   environment.variables.EDITOR = "nvim";
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     barrier
     vlc
     coreutils
@@ -90,7 +90,9 @@
     mpv
     libratbag
     piper
-  ];
+  ]) ++ (with pkgs-unstable; [
+    bazecor
+  ]);
 
   services.mullvad-vpn.enable = true;
 
