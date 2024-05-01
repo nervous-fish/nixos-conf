@@ -16,6 +16,7 @@
     ./alacritty
     ./direnv
     ./git
+    ./gtk
     ./neovim
     ./starship
     ./fish
