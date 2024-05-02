@@ -214,6 +214,8 @@
 
   environment.systemPackages = (with pkgs; [
     barrier
+    dracula-theme
+    dracula-icon-theme
     vlc
     coreutils
     dbeaver
@@ -245,7 +247,7 @@
   ]) ++ (with pkgs-unstable; [
     bazecor
   ]) ++ (with pkgs.gnome; [
-    gnome-color-manager
+    gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
     dash-to-panel
     arcmenu
