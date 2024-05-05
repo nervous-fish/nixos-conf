@@ -255,6 +255,7 @@
     caffeine
     media-controls
     appindicator
+    gtile
   ]);
 
   environment.gnome.excludePackages = (with pkgs; [
