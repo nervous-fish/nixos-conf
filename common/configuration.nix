@@ -9,155 +9,72 @@
     firewall.enable = false;
   };
 
-  services.xserver.xkb.extraLayouts.optimot = {
-    description = "Optimot v1.8";
-    languages   = [ "fra" "eng" ];
-    symbolsFile = pkgs.writeText "optimot-xkb-symbols" ''
-      partial alphanumeric_keys
-      xkb_symbols "optimot" {
+  services.xserver.xkb.extraLayouts.qwerty-fr = {
+    description = "qwerty-fr";
+    languages   = [ "eng" ];
+    symbolsFile = pkgs.writeText "qwerty-fr-symbols" ''
+      partial alphanumeric_keys 
+      xkb_symbols "qwerty-fr"
+      {
+          include "us(basic)"
+          include "level3(ralt_switch)"
 
-              name[Group1]= "France - Optimot Ergo v1.8.0";
+          name[Group1]= "US keyboard with french symbols - AltGr combination";
 
-              include "latin"
+          key <TLDE> { [ grave,        asciitilde,  dead_grave,             dead_tilde           ] };
+          key <AE01> { [ 1,            exclam,      onesuperior,            exclamdown           ] };
+          key <AE02> { [ 2,            at,          twosuperior,            dead_doubleacute     ] };
+          key <AE03> { [ 3,            numbersign,  ecircumflex,            Ecircumflex          ] };
+          key <AE04> { [ 4,            dollar,      EuroSign,               dead_currency        ] }; // FIXME: dead_currency has a different mapping than the one we want for qwerty-fr. Need to define a custom dead key instead. See Windows layout for dead key definition.
+          key <AE05> { [ 5,            percent,     dead_macron,            dead_abovedot        ] };
+          key <AE06> { [ 6,            asciicircum, dead_circumflex,        dead_caron           ] };
+          key <AE07> { [ 7,            ampersand,   ucircumflex,            Ucircumflex          ] };
+          key <AE08> { [ 8,            asterisk,    icircumflex,            Icircumflex          ] };
+          key <AE09> { [ 9,            parenleft,   ocircumflex,            Ocircumflex          ] };
+          key <AE10> { [ 0,            parenright,  oslash,                 Oslash               ] };
+          key <AE11> { [ minus,        underscore,  endash,                 emdash               ] };
+          key <AE12> { [ equal,        plus,        notequal,               approxeq             ] };
+          
+          key <AD01> { [ q,            Q,           acircumflex,            Acircumflex          ] };
+          key <AD02> { [ w,            W,           eacute,                 Eacute               ] };
+          key <AD03> { [ e,            E,           egrave,                 Egrave               ] };
+          key <AD04> { [ r,            R,           registered,             copyright            ] };
+          key <AD05> { [ t,            T,           thorn,                  THORN                ] };
+          key <AD06> { [ y,            Y,           dead_invertedbreve,     dead_breve           ] };
+          key <AD07> { [ u,            U,           ugrave,                 Ugrave               ] };
+          key <AD08> { [ i,            I,           igrave,                 Igrave               ] };
+          key <AD09> { [ o,            O,           ograve,                 Ograve               ] };
+          key <AD10> { [ p,            P,           oe,                     OE                   ] };
+          key <AD11> { [ bracketleft,  braceleft,   guillemotleft,          leftdoublequotemark  ] };
+          key <AD12> { [ bracketright, braceright,  guillemotright,         rightdoublequotemark ] };
 
-              key <TLDE> { type[group1] = "FOUR_LEVEL_CONTROL", [ dollar, EuroSign, dead_currency, copyright, dollar, dollar ] }; // $ € ¤ ©
-              key <AE01> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ guillemotleft, 1, leftdoublequotemark, onequarter, 1, 1 ] }; // « 1 “ ¼
-              key <AE02> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ guillemotright, 2, rightdoublequotemark, onehalf, 2, 2 ] }; // » 2 ” ½
-              key <AE03> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ quotedbl, 3, doublelowquotemark, threequarters, 3, 3 ] }; // " 3 „ ¾
-              key <AE04> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ minus, 4, U2011, onethird, 4, 4 ] }; // - 4 ‑ ⅓
-              key <AE05> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ plus, 5, plusminus, twothirds, 5, 5 ] }; // + 5 ± ⅔
-              key <AE06> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ asterisk, 6, multiply, U273B, 6, 6 ] }; // * 6 × ✻
-              key <AE07> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ slash, 7, backslash, division, 7, 7 ] }; // / 7 \ ÷
-              key <AE08> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ equal, 8, notequal, U2248, 8, 8 ] }; // = 8 ≠ ≈
-              key <AE09> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ parenleft, 9, bracketleft, minutes, 9, 9 ] }; // ( 9 [ ′
-              key <AE10> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ parenright, 0, bracketright, seconds, 0, 0 ] }; // ) 0 ] ″
-              key <AE11> { type[group1] = "FOUR_LEVEL_CONTROL", [ at, underscore, U2212, figdash, minus, minus ] }; // @ _ − ‒
-              key <AE12> { type[group1] = "FOUR_LEVEL_CONTROL", [ numbersign, percent, degree, masculine, plus, plus ] }; // # % ° º
-              key <AD01> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ agrave, Agrave, less, U2A7D, q, q ] }; // à À < ⩽
-              key <AD02> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ j, J, greater, U2A7E, j, j ] }; // j J > ⩾
-              key <AD03> { type[group1] = "FOUR_LEVEL_ALPHABETIC_CONTROL", [ o, O, oe, OE, o, o ] }; // o O œ Œ
-              key <AD04> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ eacute, Eacute, dead_acute, Cyrillic_zhe, x, x ] }; // é É ´ ж
-              key <AD05> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ b, B, emdash, U274F, b, b ] }; // b B — ❏
-              key <AD06> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ f, F, leftsinglequotemark, U2726, f, f ] }; // f F ‘ ✦
-              key <AD07> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ d, D, braceleft, dagger, d, d ] }; // d D { †
-              key <AD08> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ l, L, braceright, doubledagger, l, l ] }; // l L } ‡
-              key <AD09> { type[group1] = "FOUR_LEVEL_CONTROL", [ apostrophe, question, rightsinglequotemark, questiondown, semicolon, semicolon ] }; // ' ? ’ ¿
-              key <AD10> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ q, Q, dead_abovering, U2E2E, q, q ] }; // q Q ˚ ⸮
-              key <AD11> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ x, X, bar, registered, x, x ] }; // x X | ®
-              key <AD12> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ z, Z, rightarrow, trademark, z, z ] }; // z Z → ™
-              key <AC01> { type[group1] = "FOUR_LEVEL_ALPHABETIC_CONTROL", [ a, A, ae, AE, a, a ] }; // a A æ Æ
-              key <AC02> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ i, I, downarrow, section, i, i ] }; // i I ↓ §
-              key <AC03> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ e, E, uparrow, paragraph, e, e ] }; // e E ↑ ¶
-              key <AC04> { type[group1] = "FOUR_LEVEL_ALPHABETIC_CONTROL", [ u, U, ugrave, Ugrave, u, u ] }; // u U ù Ù
-              key <AC05> { type[group1] = "FOUR_LEVEL_CONTROL", [ comma, semicolon, endash, checkmark, comma, comma ] }; // , ; – ✓
-              key <AC06> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ p, P, grave, U2605, p, p ] }; // p P ` ★
-              key <AC07> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ t, T, ampersand, U2B05, t, t ] }; // t T & ⬅
-              key <AC08> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ s, S, infinity, U2B07, s, s ] }; // s S ∞ ⬇
-              key <AC09> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ r, R, Lcaron, U2B06, r, r ] }; // r R Ľ ⬆
-              key <AC10> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ n, N, dead_tilde, U27A1, n, n ] }; // n N ~ ➡
-              key <AC11> { type[group1] = "FOUR_LEVEL_CONTROL", [ dead_circumflex, exclam, dead_diaeresis, exclamdown, a, a ] }; // ^ ! ¨ ¡
-              key <BKSL> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ ccedilla, Ccedilla, dead_horn, U1F12F, w, w ] }; // ç Ç ̛ 🄯
-              key <LSGT> { type[group1] = "FOUR_LEVEL_CONTROL", [ dead_caron, dead_cedilla, asciitilde, U2248, z, z ] }; // ˇ ¸ ~ ≈
-              key <AB01> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ k, K, oslash, U2388, k, k ] }; // k K ø ⎈
-              key <AB02> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ y, Y, dead_abovedot, U2325, y, y ] }; // y Y ˙ ⌥
-              key <AB03> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ egrave, Egrave, dead_grave, U2318, c, c ] }; // è È ` ⌘
-              key <AB04> { type[group1] = "FOUR_LEVEL_CONTROL", [ period, colon, ellipsis, periodcentered, v, v ] }; // . : … ·
-              key <AB05> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ w, W, U2022, ballotcross, w, w ] }; // w W • ✗
-              key <AB06> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ g, G, mu, U2723, g, g ] }; // g G µ ✣
-              key <AB07> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ c, C, dead_cedilla, U2660, c, c ] }; // c C ¸ ♠
-              key <AB08> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ m, M, dead_macron, heart, m, m ] }; // m M ¯ ♥
-              key <AB09> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ h, H, dead_breve, diamond, h, h ] }; // h H ˘ ♦
-              key <AB10> { type[group1] = "FOUR_LEVEL_SEMIALPHABETIC_CONTROL", [ v, V, dead_caron, club, v, v ] }; // v V ˇ ♣
-              key <SPCE> { type[group1] = "FOUR_LEVEL_CONTROL", [ space, U202F, nobreakspace, hyphen, space, space ] }; //       ­
+          key <AC01> { [ a,            A,           agrave,                 Agrave               ] };
+          key <AC02> { [ s,            S,           ae,                     AE                   ] };
+          key <AC03> { [ d,            D,           ediaeresis,             Ediaeresis           ] };
+          key <AC04> { [ f,            F,           VoidSymbol,             VoidSymbol           ] };
+          key <AC05> { [ g,            G,           dead_greek,             VoidSymbol           ] }; // FIXME: dead_greek has a different mapping than the one we want for qwerty-fr. Need to define a custom dead key instead. See Windows layout for dead key definition.
+          key <AC06> { [ h,            H,           ydiaeresis,             Ydiaeresis           ] };
+          key <AC07> { [ j,            J,           udiaeresis,             Udiaeresis           ] };
+          key <AC08> { [ k,            K,           idiaeresis,             Idiaeresis           ] };
+          key <AC09> { [ l,            L,           odiaeresis,             Odiaeresis           ] };
+          key <AC10> { [ semicolon,    colon,       dead_acute,             dead_abovering       ] };
+          key <AC11> { [ apostrophe,   quotedbl,    dead_grave,             dead_diaeresis       ] };
+          key <BKSL> { [ backslash,    bar,         VoidSymbol,             doublelowquotemark   ] }; // „
 
-              include "level3(ralt_switch)"
-      };
-    '';
-    typesFile = pkgs.writeText "optimot-xkb-types" ''
-      xkb_types "optimot" { 
-          include "complete"
+          key <LSGT> { [ less,         greater,     lessthanequal,          greaterthanequal     ] };
+          key <AB01> { [ z,            Z,           adiaeresis,             Adiaeresis           ] };
+          key <AB02> { [ x,            X,           multiply,               division             ] };
+          key <AB03> { [ c,            C,           ccedilla,               Ccedilla             ] };
+          key <AB04> { [ v,            V,           VoidSymbol,             VoidSymbol           ] };
+          key <AB05> { [ b,            B,           ssharp,                 U1E9E                ] }; // ß, ẞ (capital)
+          key <AB06> { [ n,            N,           ntilde,                 Ntilde               ] };
+          key <AB07> { [ m,            M,           VoidSymbol,             VoidSymbol           ] };
+          key <AB08> { [ comma,        less,        dead_cedilla,           dead_ogonek          ] };
+          key <AB09> { [ period,       greater,     periodcentered,         ellipsis             ] }; // ., >, ·, …
+          key <AB10> { [ slash,        question,    rightsinglequotemark,   questiondown         ] }; // /, ?, ’, ¿
+          key <SPCE> { [ space,        space,       nobreakspace,           0x100202F            ] }; // espace insécable fine
 
-          type "FOUR_LEVEL_CONTROL" {
-              modifiers = Shift+LevelThree+Control;
-              
-              map[None] = Level1;
-              map[Shift] = Level2;
-              map[LevelThree] = Level3;
-              map[Shift+LevelThree] = Level4;
-              map[Control]  = Level5;
-              map[Control+Shift] = Level6;
-
-              preserve[Control] = Control;
-              preserve[Shift+Control] = Control;
-              
-              level_name[Level1] = "Base";
-              level_name[Level2] = "Shift";
-              level_name[Level3] = "Alt Base";
-              level_name[Level4] = "Shift Alt";
-              level_name[Level5] = "Control";
-              level_name[Level6] = "Shift Control";
-          };
-
-          type "FOUR_LEVEL_ALPHABETIC_CONTROL" {
-              modifiers = Shift+Lock+LevelThree+Control;
-              
-              map[None] = Level1;
-              map[Shift] = Level2;
-              map[Lock]  = Level2;
-              map[LevelThree] = Level3;
-              map[Shift+LevelThree] = Level4;
-              map[Lock+LevelThree] =  Level4;
-              map[Lock+Shift+LevelThree] =  Level3;
-              map[Control]  = Level5;
-              map[Control+Shift] = Level6;
-
-              preserve[Control] = Control;
-              preserve[Shift+Control] = Control;
-              
-              level_name[Level1] = "Base";
-              level_name[Level2] = "Shift";
-              level_name[Level3] = "Alt Base";
-              level_name[Level4] = "Shift Alt";
-              level_name[Level5] = "Control";
-              level_name[Level6] = "Shift Control";
-          };
-
-          type "FOUR_LEVEL_SEMIALPHABETIC_CONTROL" {
-              modifiers = Shift+Lock+LevelThree+Control;
-              
-              map[None] = Level1;
-              map[Shift] = Level2;
-              map[Lock]  = Level2;
-              map[LevelThree] = Level3;
-              map[Shift+LevelThree] = Level4;
-              map[Lock+LevelThree] =  Level3;
-              map[Lock+Shift+LevelThree] = Level4;
-              map[Control]  = Level5;
-              map[Control+Shift] = Level6;
-              
-              preserve[Control] = Control;
-              preserve[Shift+Control] = Control;
-              preserve[Lock+LevelThree] = Lock;
-              preserve[Lock+Shift+LevelThree] = Lock;
-              
-              level_name[Level1] = "Base";
-              level_name[Level2] = "Shift";
-              level_name[Level3] = "Alt Base";
-              level_name[Level4] = "Shift Alt";
-              level_name[Level5] = "Control";
-              level_name[Level6] = "Shift Control";
-          };
-                  
-      };
-    '';
-    keycodesFile = pkgs.writeText "optimot-xkb-keycodes" ''
-      xkb_keycodes "optimot" { include "evdev+aliases(azerty)" };
-    '';
-    compatFile = pkgs.writeText "optimot-xkb-compat" ''
-      xkb_compatibility "optimot" { include "complete" };
-    '';
-    geometryFile = pkgs.writeText "optimot-xkb-geometry" ''
-      xkb_geometry "optimot" { include "latin" };
+      }; 
     '';
   };
 
@@ -256,6 +173,7 @@
     media-controls
     appindicator
     gtile
+    kmonad-toggle
   ]);
 
   environment.gnome.excludePackages = (with pkgs; [
