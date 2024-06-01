@@ -6,14 +6,16 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };  
+    fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, ... }: {
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, fh, ... }: {
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
           pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+          fh = fh;
         };
         modules = [
           ./machines/desktop

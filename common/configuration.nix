@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, lib, ... }:
+{ config, pkgs, pkgs-unstable, fh, lib, ... }:
 
 {
   networking = {
@@ -129,7 +129,9 @@
 
   environment.variables.EDITOR = "nvim";
 
-  environment.systemPackages = (with pkgs; [
+  environment.systemPackages = [
+    fh.packages.x86_64-linux.default 
+  ] ++ (with pkgs; [
     barrier
     dracula-theme
     dracula-icon-theme
