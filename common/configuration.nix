@@ -163,6 +163,7 @@
     mpv
     libratbag
     piper
+    pinta
   ]) ++ (with pkgs-unstable; [
     bazecor
   ]) ++ (with pkgs.gnome; [
