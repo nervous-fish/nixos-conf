@@ -5,8 +5,14 @@
     hostName = "nixos";
     networkmanager.enable = true;
     networkmanager.wifi.powersave = false;
+    resolvconf.enable = false;
     nameservers = [ "1.1.1.1" "9.9.9.9" ];
-    firewall.enable = false;
+    firewall = {
+      enable = true;
+      interfaces.enp6s0.allowedTCPPorts = [  
+        24800 # barrier server
+      ];
+    };
   };
 
   services.xserver.xkb.extraLayouts.qwerty-fr = {
@@ -137,7 +143,7 @@
     dracula-icon-theme
     vlc
     coreutils
-    dbeaver
+    dbeaver-bin
     xdg-utils
     netcat
     discord
@@ -164,8 +170,10 @@
     libratbag
     piper
     pinta
+    android-tools
+    wireshark
+    busybox
   ]) ++ (with pkgs-unstable; [
-    bazecor
   ]) ++ (with pkgs.gnome; [
     gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
@@ -200,6 +208,8 @@
   programs.steam = {
     enable = true;
   };
+
+  programs.wireshark.enable = true;
 
   services.mullvad-vpn.enable = true;
 
