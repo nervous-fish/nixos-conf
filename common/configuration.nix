@@ -11,6 +11,7 @@
       enable = true;
       interfaces.enp6s0.allowedTCPPorts = [  
         24800 # barrier server
+        53842 # gokapi
       ];
     };
   };
