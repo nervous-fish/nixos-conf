@@ -116,9 +116,10 @@
       experimental-features = nix-command flakes
     '';
     gc = {
+      persistent = true;
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 15days";
+      options = "--delete-older-than 7d";
     };
     settings = { 
       auto-optimise-store = true;
@@ -205,10 +206,6 @@
     hitori # sudoku game
     atomix # puzzle game
   ]);
-
-  programs.steam = {
-    enable = true;
-  };
 
   programs.wireshark.enable = true;
 
