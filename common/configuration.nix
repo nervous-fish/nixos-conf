@@ -172,6 +172,8 @@
     libratbag
     piper
     pinta
+    shotcut
+    ffmpeg_7
     android-tools
     wireshark
     busybox

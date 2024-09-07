@@ -12,7 +12,7 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
     initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];    
     initrd.preDeviceCommands = ''
-      DEVS="0000:16:00.0"
+      DEVS="0000:16:00.0 0000:11:00.0"
 
       for DEV in $DEVS; do
         echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
@@ -62,10 +62,6 @@
     device = "/dev/disk/by-label/nvme2n1p1";
   };
   
-  fileSystems."/run/media/nervousfish/nvme3m1p1" = {
-    device = "/dev/disk/by-label/nvme3n1p1";
-  };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
