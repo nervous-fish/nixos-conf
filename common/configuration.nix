@@ -182,6 +182,7 @@
     wireshark
     busybox
     logseq
+    anki
   ]) ++ (with pkgs-unstable; [
     bazecor
   ]) ++ (with pkgs.gnome; [
