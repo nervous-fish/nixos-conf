@@ -1,6 +1,10 @@
 { config, pkgs, pkgs-unstable, fh, lib, ... }:
 
 {
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-27.3.11"
+  ]; 
+
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
@@ -177,7 +181,9 @@
     android-tools
     wireshark
     busybox
+    logseq
   ]) ++ (with pkgs-unstable; [
+    bazecor
   ]) ++ (with pkgs.gnome; [
     gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
