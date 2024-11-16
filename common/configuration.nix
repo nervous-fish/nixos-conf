@@ -15,12 +15,16 @@
       enable = true;
       interfaces.enp6s0.allowedTCPPorts = [  
         24800 # barrier server
-        53842 # gokapi
       ];
     };
   };
  
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      mtu = 1500;
+    };
+  };
 
   security.rtkit.enable = true;
 
@@ -113,6 +117,7 @@
     wireshark
     busybox
     logseq
+    filebot
     anki
   ]) ++ (with pkgs-unstable; [
     bazecor
