@@ -99,7 +99,6 @@
     virt-manager
     psensor 
     gparted
-    qbittorrent
     looking-glass-client
     mullvad-vpn
     ffsend
@@ -121,6 +120,7 @@
     anki
   ]) ++ (with pkgs-unstable; [
     bazecor
+    qbittorrent
   ]) ++ (with pkgs.gnome; [
     gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
@@ -165,6 +165,7 @@
 
   services.xserver = {
     enable = true;
+    xkb.layout = "optimot";
     displayManager.gdm = {
       enable = true;
       wayland = false;
