@@ -14,6 +14,7 @@
     firewall = {
       enable = true;
       interfaces.enp6s0.allowedTCPPorts = [  
+        22
         24800 # barrier server
       ];
     };
@@ -79,82 +80,80 @@
   environment.systemPackages = [
     fh.packages.x86_64-linux.default 
   ] ++ (with pkgs; [
+    android-tools
+    anki
     barrier
-    dracula-theme
-    dracula-icon-theme
-    vlc
+    busybox
     coreutils
     dbeaver-bin
-    xdg-utils
-    netcat
     discord
-    vscode-fhs
-    libreoffice-qt
-    git
-    obs-studio
-    unzip
-    libva
-    protonvpn-gui
-    which
-    virt-manager
-    psensor 
-    gparted
-    looking-glass-client
-    mullvad-vpn
-    ffsend
-    onionshare-gui
-    tor-browser-bundle-bin
-    yt-dlp
-    killall
-    mpv
-    libratbag
-    piper
-    pinta
-    shotcut
+    dracula-icon-theme
+    dracula-theme
     ffmpeg_7
-    android-tools
-    wireshark
-    busybox
-    logseq
+    ffsend
     filebot
-    anki
+    git
+    gnome-tweaks
+    gparted
+    killall
+    libratbag
+    libreoffice-qt
+    libva
+    logseq
+    looking-glass-client
+    mpv
+    mullvad-vpn
+    netcat
+    obs-studio
+    onionshare-gui
+    pinta
+    piper
+    protonvpn-gui
+    shotcut
+    tor-browser-bundle-bin
+    unzip
+    virt-manager
+    vlc
+    vscode-fhs
+    which
+    wireshark
+    xdg-utils
+    yt-dlp
   ]) ++ (with pkgs-unstable; [
     bazecor
     qbittorrent
-  ]) ++ (with pkgs.gnome; [
-    gnome-tweaks
   ]) ++ (with pkgs.gnomeExtensions; [
-    dash-to-panel
+    appindicator
     arcmenu
     blur-my-shell
     caffeine
-    media-controls
-    appindicator
+    dash-to-panel
     gtile
     kmonad-toggle
+    media-controls
   ]);
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-photos
     gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    gnome-music
-    gnome-terminal
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
-    gnome-characters
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
   ]);
+
+  programs.appimage.binfmt = true;
+  programs.appimage.enable = true;
 
   programs.wireshark.enable = true;
 
   services.mullvad-vpn.enable = true;
+
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = false;
+      AllowUsers = [ "nervousfish" ];
+      PermitRootLogin = "no";
+    };
+  };
 
   services.pipewire = {
     enable = true;
@@ -165,7 +164,8 @@
 
   services.xserver = {
     enable = true;
-    xkb.layout = "optimot";
+    xkb.layout = "fr";
+    xkb.variant = "ergol";
     displayManager.gdm = {
       enable = true;
       wayland = false;
