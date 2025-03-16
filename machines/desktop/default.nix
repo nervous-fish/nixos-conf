@@ -7,7 +7,7 @@
     ../../common/configuration.nix
   ];
 
-#  systemd.watchdog.rebootTime = "0";
+  systemd.watchdog.rebootTime = "15s";
   
   nixpkgs.config.allowUnfree = true;
 
