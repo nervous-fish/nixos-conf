@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, fh, lib, ... }:
+{ config, pkgs, pkgs-unstable, lib, ... }:
 
 {
   nixpkgs.config.permittedInsecurePackages = [
@@ -77,9 +77,7 @@
 
   environment.variables.EDITOR = "nvim";
 
-  environment.systemPackages = [
-    fh.packages.x86_64-linux.default 
-  ] ++ (with pkgs; [
+  environment.systemPackages = (with pkgs; [
     android-tools
     anki
     barrier
@@ -189,7 +187,6 @@
 
 
   imports = [ 
-    ./nervousfish.nix
-    ./keyboards
+    ./users/nervousfish
   ];
 }

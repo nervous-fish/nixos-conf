@@ -6,16 +6,14 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };  
-    fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, fh, ... }: {
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, home-manager, ... }: {
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
-          pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-          fh = fh;
+          pkgs-unstable = nixpkgs-unstable.legacyPackages.${system}; # alias unstable packages to this variable
         };
         modules = [
           ./machines/desktop
@@ -26,7 +24,7 @@
               useUserPackages = true;
               users.nervousfish = {
                 imports = [
-                  ./machines/desktop/home
+                  ./common/users/nervousfish/home
                 ];
               };
             };
