@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  programs.fish.enable = true;
-
   users.users.nervousfish = {
     isNormalUser = true;
     description = "nervous-fish";

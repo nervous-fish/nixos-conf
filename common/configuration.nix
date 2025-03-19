@@ -141,6 +141,8 @@
 
   programs.wireshark.enable = true;
 
+  programs.fish.enable = true;
+
   services.mullvad-vpn.enable = true;
 
   services.openssh = {
@@ -184,7 +186,6 @@
   ];
 
   system.stateVersion = "22.11";
-
 
   imports = [ 
     ./users/nervousfish
