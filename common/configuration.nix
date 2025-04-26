@@ -143,8 +143,6 @@
 
   programs.fish.enable = true;
 
-  services.mullvad-vpn.enable = true;
-
   services.openssh = {
     enable = true;
     ports = [ 22 ];
