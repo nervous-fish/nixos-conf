@@ -108,6 +108,7 @@
     piper
     protonvpn-gui
     shotcut
+    stremio
     tor-browser-bundle-bin
     unzip
     virt-manager
@@ -127,7 +128,7 @@
     caffeine
     dash-to-panel
     gtile
-    kmonad-toggle
+    tiling-shell
     media-controls
   ]);
 
