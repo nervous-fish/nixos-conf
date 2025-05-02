@@ -1,10 +1,6 @@
 { config, pkgs, pkgs-unstable, lib, ... }:
 
 {
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-27.3.11"
-  ];
-
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
@@ -72,8 +68,6 @@
       ];
     }; 
   };
-
-  nixpkgs.config.allowUnfree = true;  
 
   environment.variables.EDITOR = "nvim";
 

@@ -9,9 +9,7 @@
 
   systemd.watchdog.rebootTime = "15s";
   
-  nixpkgs.config.allowUnfree = true;
-
-  console.keyMap = "us";
+  console.useXkbConfig = true;
 
   virtualisation.libvirtd = {
     enable = true;

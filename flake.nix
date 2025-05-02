@@ -14,8 +14,23 @@
       desktop = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
-          pkgs-unstable = nixpkgs-unstable.legacyPackages.${system}; # alias unstable packages to this variable
-          pkgs-kernel = nixpkgs-kernel.legacyPackages.${system}; # alias unstable packages to this variable
+          pkgs = import nixpkgs { 
+            inherit system; 
+            config.allowUnfree = true; 
+            config.permittedInsecurePackages = [
+              "electron-27.3.11"
+            ];
+          };
+          
+          pkgs-kernel = import nixpkgs-kernel {
+            inherit system; 
+            config.allowUnfree = true;
+          };
+
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system; 
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./machines/desktop

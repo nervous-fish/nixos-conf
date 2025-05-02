@@ -9,10 +9,23 @@
     ];
 
   boot = {
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      systemd-boot = {
+        enable = true;
+        consoleMode = "max";
+      };
+    };
+    supportedFilesystems = [ "ntfs" ];
+    kernelPackages = pkgs-kernel.linuxPackagesFor pkgs-kernel.linux_6_12;
+
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
     initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];    
     initrd.preDeviceCommands = ''
-      DEVS="0000:16:00.0 0000:11:00.0"
+      DEVS="0000:11:00.0 0000:16:00.0"
 
       for DEV in $DEVS; do
         echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
@@ -21,7 +34,7 @@
     '';
 
     kernelModules = [ "kvm-amd" ];
-    
+
     kernelPatches = [
       {
         name = "add-acs-overrides";
@@ -64,28 +77,7 @@
   
   swapDevices = [ ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp13s0.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  boot = {
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
-      };
-      systemd-boot = {
-        enable = true;
-        consoleMode = "max";
-      };
-    };
-    supportedFilesystems = [ "ntfs" ];
-    kernelPackages = pkgs-kernel.linuxPackagesFor pkgs-kernel.linux_6_12;
-  };
 }
