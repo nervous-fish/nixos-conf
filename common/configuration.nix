@@ -159,10 +159,7 @@
     enable = true;
     xkb.layout = "fr";
     xkb.variant = "ergol";
-    displayManager.gdm = {
-      enable = true;
-      wayland = false;
-    };
+    displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
 
