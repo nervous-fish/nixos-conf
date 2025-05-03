@@ -163,6 +163,10 @@
     desktopManager.gnome.enable = true;
   };
 
+  services.udev.extraRules = ''
+    KERNEL=="ttyACM0", MODE="0666"
+  ''; # bazecor
+
   services.ratbagd = {
     enable = true;
   };
