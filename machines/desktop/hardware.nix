@@ -25,7 +25,7 @@
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
     initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];    
     initrd.preDeviceCommands = ''
-      DEVS="0000:11:00.0 0000:16:00.0"
+      DEVS="0000:11:00.0"
 
       for DEV in $DEVS; do
         echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
@@ -50,7 +50,7 @@
     kernelParams = [
       "quiet"
       "iommu=pt"
-      "vfio-pci.ids=10de:1b06,10de:10ef,1022:43f6,1022:15b6"
+      "vfio-pci.ids=10de:1b06,10de:10ef,1022:43f6,1022:15b6,168c:0030"
       "pcie_acs_override=downstream"
     ];
 
