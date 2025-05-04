@@ -51,6 +51,14 @@
         ];
       };
     };
+
+    homeConfigurations = {
+      "nervousfish" = let system = "x86_64-linux"; in home-manager.lib.homeManagerConfiguration {
+        inherit system;
+        modules = [ ./common/users/nervousfish/home ];
+        extraSpecialArgs = getSpecialArgs system;
+      };
+    };
   };
 }
 
