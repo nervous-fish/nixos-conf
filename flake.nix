@@ -9,29 +9,31 @@
     };  
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-kernel, home-manager, ... }: {
-    nixosConfigurations = {
-      desktop = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = {
-          pkgs = import nixpkgs { 
-            inherit system; 
-            config.allowUnfree = true; 
-            config.permittedInsecurePackages = [
-              "electron-27.3.11"
-            ];
-          };
-          
-          pkgs-kernel = import nixpkgs-kernel {
-            inherit system; 
-            config.allowUnfree = true;
-          };
+  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-kernel, home-manager, ... }: let 
+    getSpecialArgs = system: {
+      pkgs = import nixpkgs { 
+        inherit system;
+        config.allowUnfree = true;
+        config.permittedInsecurePackages = [
+          "electron-27.3.11"
+        ];
+      };
+      
+      pkgs-kernel = import nixpkgs-kernel {
+        inherit system;
+        config.allowUnfree = true;
+      };
 
-          pkgs-unstable = import nixpkgs-unstable {
-            inherit system; 
-            config.allowUnfree = true;
-          };
-        };
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    };
+  in {
+    nixosConfigurations = {
+      desktop = let system = "x86_64-linux"; in nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = getSpecialArgs system;
         modules = [
           ./machines/desktop
           home-manager.nixosModules.home-manager
