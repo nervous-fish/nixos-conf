@@ -137,6 +137,8 @@
     mpv
     mullvad-vpn
     netcat
+    nixd
+    nixfmt-rfc-style
     obs-studio
     onionshare-gui
     pinta
