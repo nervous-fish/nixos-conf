@@ -53,10 +53,13 @@
     };
 
     homeConfigurations = {
-      "nervousfish" = let system = "x86_64-linux"; in home-manager.lib.homeManagerConfiguration {
-        inherit system;
+      "nervousfish" = let 
+          system = "x86_64-linux"; 
+          args = getSpecialArgs system;
+      in home-manager.lib.homeManagerConfiguration {
+        pkgs = args.pkgs;
         modules = [ ./common/users/nervousfish/home ];
-        extraSpecialArgs = getSpecialArgs system;
+        extraSpecialArgs = args;
       };
     };
   };
