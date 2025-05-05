@@ -22,6 +22,5 @@
     ./fish
     ./zellij
     ./firefox
-    ./timers
   ];
 }
