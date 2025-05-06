@@ -65,6 +65,17 @@
 
   environment.variables.EDITOR = "nvim";
 
+  system.nixos.label = concatStringsSep "-" ((sort (x: y: x < y) config.tags) ++ [ "${config.version}.${self.sourceInfo.shortRev or "dirty"}" ]);
+
+  programs.appimage = {
+    binfmt = true;
+    enable = true;
+  };
+
+  programs.wireshark.enable = true;
+
+  programs.fish.enable = true;
+
   environment.systemPackages = (with pkgs; [
     android-tools
     anki
