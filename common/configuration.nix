@@ -1,49 +1,8 @@
 { config, pkgs, pkgs-unstable, lib, ... }:
 
 {
-  imports = [ 
-    ./users/nervousfish
-  ];
-
-  services.openssh = {
-    enable = true;
-    ports = [ 22 ];
-    settings = {
-      PasswordAuthentication = false;
-      AllowUsers = [ "nervousfish" ];
-      PermitRootLogin = "no";
-    };
-  };
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-  }; 
-  hardware.pulseaudio.enable = false;
-
-  services.xserver = {
-    enable = true;
-    xkb.layout = "fr";
-    xkb.variant = "ergol";
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-  };
-
-  console.useXkbConfig = true;
-
-  services.udev.extraRules = ''
-    KERNEL=="ttyACM0", MODE="0666"
-  ''; # bazecor
-
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
-
   networking = {
     hostName = "nixos";
-    useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
     networkmanager.wifi.powersave = false;
     resolvconf.enable = false;
@@ -59,14 +18,17 @@
  
   virtualisation.docker = {
     enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
+    daemon.settings = {
+      mtu = 1500;
     };
   };
 
+  security.rtkit.enable = true;
+
   time.timeZone = "Europe/Paris";
+ 
   i18n.defaultLocale = "en_US.UTF-8";
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "fr_FR.UTF-8";
     LC_IDENTIFICATION = "fr_FR.UTF-8";
@@ -102,15 +64,6 @@
   };
 
   environment.variables.EDITOR = "nvim";
-
-  programs.appimage = {
-    binfmt = true;
-    enable = true;
-  };
-
-  programs.wireshark.enable = true;
-
-  programs.fish.enable = true;
 
   environment.systemPackages = (with pkgs; [
     android-tools
@@ -174,5 +127,57 @@
     gnome-tour
   ]);
 
+  programs.appimage.binfmt = true;
+  programs.appimage.enable = true;
+
+  programs.wireshark.enable = true;
+
+  programs.fish.enable = true;
+
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = false;
+      AllowUsers = [ "nervousfish" ];
+      PermitRootLogin = "no";
+    };
+  };
+
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  }; 
+  hardware.pulseaudio.enable = false;
+
+  services.xserver = {
+    enable = true;
+    xkb.layout = "fr";
+    xkb.variant = "ergol";
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
+
+  services.udev.extraRules = ''
+    KERNEL=="ttyACM0", MODE="0666"
+  ''; # bazecor
+
+  services.ratbagd = {
+    enable = true;
+  };
+
+  systemd.tmpfiles.rules = [
+    "f /dev/shm/looking-glass 0660 nervousfish qemu-libvirtd -"
+  ];
+
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
+
   system.stateVersion = "22.11";
+
+  imports = [ 
+    ./users/nervousfish
+  ];
 }
