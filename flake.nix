@@ -9,8 +9,10 @@
     };  
   };
 
-  outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-kernel, home-manager, ... }: let 
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixpkgs-kernel, home-manager, ... }: let 
     getSpecialArgs = system: {
+      inherit self;
+      
       pkgs = import nixpkgs { 
         inherit system;
         config.allowUnfree = true;
