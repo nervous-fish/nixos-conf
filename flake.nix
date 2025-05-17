@@ -9,7 +9,7 @@
     };  
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixpkgs-kernel, home-manager, ... }: let 
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-kernel, home-manager, ... }: let 
     getSpecialArgs = system: {
       inherit self;
       

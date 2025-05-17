@@ -1,8 +1,13 @@
 { self, config, pkgs, pkgs-unstable, lib, ... }:
 
 {
+  system.nixos.label = "${config.system.nixos.version}-${self.sourceInfo.shortRev or "dirty"}";
+  
+  system.stateVersion = "22.11";
+
   networking = {
     hostName = "nixos";
+    useDHCP = lib.mkForce true;
     networkmanager.enable = true;
     networkmanager.wifi.powersave = false;
     resolvconf.enable = false;
@@ -25,49 +30,45 @@
 
   security.rtkit.enable = true;
 
-  time.timeZone = "Europe/Paris";
- 
   i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = "Europe/Paris";
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "fr_FR.UTF-8";
-    LC_IDENTIFICATION = "fr_FR.UTF-8";
-    LC_MEASUREMENT = "fr_FR.UTF-8";
-    LC_MONETARY = "fr_FR.UTF-8";
-    LC_NAME = "fr_FR.UTF-8";
-    LC_NUMERIC = "fr_FR.UTF-8";
-    LC_PAPER = "fr_FR.UTF-8";
-    LC_TELEPHONE = "fr_FR.UTF-8";
-    LC_TIME = "fr_FR.UTF-8";
-  };
-
-  nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    gc = {
-      persistent = true;
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = false;
+      AllowUsers = [ "nervousfish" ];
+      PermitRootLogin = "no";
     };
-    settings = { 
-      auto-optimise-store = true;
-      builders-use-substitutes = true;
-      substituters = [
-        "https://cache.nixos.org"
-      ];
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      ];
-    }; 
   };
 
-  environment.variables.EDITOR = "nvim";
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  }; 
+  hardware.pulseaudio.enable = false;
 
-  system.nixos.label = lib.concatStringsSep "-" (
-    (lib.sort (x: y: x < y) config.system.nixos.tags) 
-    ++ [ "${config.system.nixos.version}.${self.sourceInfo.shortRev or "dirty"}" ]);
+  services.xserver = {
+    enable = true;
+    xkb.layout = "fr";
+    xkb.variant = "ergol";
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
+
+  services.udev.extraRules = ''
+    KERNEL=="ttyACM0", MODE="0666"
+  ''; # bazecor
+
+  services.ratbagd = {
+    enable = true;
+  };
+
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
 
   programs.appimage = {
     binfmt = true;
@@ -78,6 +79,8 @@
 
   programs.fish.enable = true;
 
+  environment.variables.EDITOR = "nvim";
+  
   environment.systemPackages = (with pkgs; [
     android-tools
     anki
@@ -140,48 +143,27 @@
     gnome-tour
   ]);
 
-  services.openssh = {
-    enable = true;
-    ports = [ 22 ];
-    settings = {
-      PasswordAuthentication = false;
-      AllowUsers = [ "nervousfish" ];
-      PermitRootLogin = "no";
+  nix = {
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    gc = {
+      persistent = true;
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
+    settings = { 
+      auto-optimise-store = true;
+      builders-use-substitutes = true;
+      substituters = [
+        "https://cache.nixos.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      ];
+    }; 
   };
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-  }; 
-  hardware.pulseaudio.enable = false;
-
-  services.xserver = {
-    enable = true;
-    xkb.layout = "fr";
-    xkb.variant = "ergol";
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-  };
-
-  services.udev.extraRules = ''
-    KERNEL=="ttyACM0", MODE="0666"
-  ''; # bazecor
-
-  services.ratbagd = {
-    enable = true;
-  };
-
-  systemd.tmpfiles.rules = [
-    "f /dev/shm/looking-glass 0660 nervousfish qemu-libvirtd -"
-  ];
-
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
-
-  system.stateVersion = "22.11";
 
   imports = [ 
     ./users/nervousfish

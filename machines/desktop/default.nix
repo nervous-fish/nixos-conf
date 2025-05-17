@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -10,6 +10,10 @@
   systemd.watchdog.rebootTime = "15s";
   
   console.useXkbConfig = true;
+
+  systemd.tmpfiles.rules = [
+    "f /dev/shm/looking-glass 0660 nervousfish qemu-libvirtd -"
+  ];
 
   virtualisation.libvirtd = {
     enable = true;
