@@ -26,6 +26,10 @@
     daemon.settings = {
       mtu = 1500;
     };
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
   };
 
   security.rtkit.enable = true;
@@ -95,6 +99,7 @@
     ffsend
     filebot
     git
+    google-chrome
     gnome-tweaks
     gparted
     killall
