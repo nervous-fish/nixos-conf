@@ -2,7 +2,7 @@
 
 {
   system.nixos.label = "${config.system.nixos.version}-${self.sourceInfo.shortRev or "dirty"}";
-  
+
   system.stateVersion = "22.11";
 
   networking = {
@@ -14,13 +14,13 @@
     nameservers = [ "1.1.1.1" "9.9.9.9" ];
     firewall = {
       enable = true;
-      interfaces.enp6s0.allowedTCPPorts = [  
+      interfaces.enp6s0.allowedTCPPorts = [
         22
         24800 # barrier server
       ];
     };
   };
- 
+
   virtualisation.docker = {
     enable = true;
     daemon.settings = {
@@ -51,7 +51,7 @@
     enable = true;
     pulse.enable = true;
     wireplumber.enable = true;
-  }; 
+  };
   hardware.pulseaudio.enable = false;
 
   services.xserver = {
@@ -84,7 +84,7 @@
   programs.fish.enable = true;
 
   environment.variables.EDITOR = "nvim";
-  
+
   environment.systemPackages = (with pkgs; [
     android-tools
     anki
@@ -158,7 +158,8 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    settings = { 
+    settings = {
+      download-buffer-size = 524288000;
       auto-optimise-store = true;
       builders-use-substitutes = true;
       substituters = [
@@ -167,10 +168,10 @@
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
-    }; 
+    };
   };
 
-  imports = [ 
+  imports = [
     ./users/nervousfish
   ];
 }
