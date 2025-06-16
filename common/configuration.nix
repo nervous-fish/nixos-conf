@@ -62,6 +62,8 @@
     desktopManager.gnome.enable = true;
   };
 
+  services.mullvad-vpn.enable = true;
+
   services.udev.extraRules = ''
     KERNEL=="ttyACM0", MODE="0666"
   ''; # bazecor
