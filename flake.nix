@@ -1,26 +1,26 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; 
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-kernel.url = "github:nixos/nixpkgs/cdd2ef009676ac92b715ff26630164bb88fec4e0";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
-    };  
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-kernel, home-manager, ... }: let 
+  outputs = { self, nixpkgs, nixpkgs-unstable, nixpkgs-kernel, home-manager, ... }: let
     getSpecialArgs = system: {
       inherit self;
-      
-      pkgs = import nixpkgs { 
+
+      pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
         config.permittedInsecurePackages = [
           "electron-27.3.11"
         ];
       };
-      
+
       pkgs-kernel = import nixpkgs-kernel {
         inherit system;
         config.allowUnfree = true;
@@ -55,8 +55,8 @@
     };
 
     homeConfigurations = {
-      "nervousfish" = let 
-          system = "x86_64-linux"; 
+      "nervousfish" = let
+          system = "x86_64-linux";
           args = getSpecialArgs system;
       in home-manager.lib.homeManagerConfiguration {
         pkgs = args.pkgs;

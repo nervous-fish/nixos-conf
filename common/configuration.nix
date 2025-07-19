@@ -52,7 +52,7 @@
     pulse.enable = true;
     wireplumber.enable = true;
   };
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   services.xserver = {
     enable = true;
@@ -71,10 +71,6 @@
   services.ratbagd = {
     enable = true;
   };
-
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
 
   programs.appimage = {
     binfmt = true;
@@ -113,6 +109,7 @@
     looking-glass-client
     mpv
     mullvad-vpn
+    nerd-fonts.fira-code
     netcat
     nixd
     nixfmt-rfc-style
