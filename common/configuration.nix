@@ -91,6 +91,7 @@
     android-tools
     anki
     barrier
+    burpsuite
     busybox
     coreutils
     dbeaver-bin
@@ -133,6 +134,7 @@
     yt-dlp
   ]) ++ (with pkgs-unstable; [
     bazecor
+    parsec-bin
     qbittorrent
   ]) ++ (with pkgs.gnomeExtensions; [
     appindicator
