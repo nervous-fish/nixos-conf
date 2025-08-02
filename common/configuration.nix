@@ -118,6 +118,7 @@
     pinta
     piper
     protonvpn-gui
+    qpwgraph
     shotcut
     stremio
     tor-browser-bundle-bin
