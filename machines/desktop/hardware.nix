@@ -1,4 +1,4 @@
-{ config, lib, pkgs-kernel, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 {
   imports =
@@ -18,7 +18,7 @@
     };
     supportedFilesystems = [ "ntfs" ];
 
-    kernelPackages = pkgs-kernel.linuxPackagesFor pkgs-kernel.linux_6_12;
+    kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_16;
 
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
     initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
