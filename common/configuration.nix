@@ -105,6 +105,7 @@
     libratbag
     libreoffice-qt
     libva
+    lm_sensors
     logseq
     looking-glass-client
     mpv
