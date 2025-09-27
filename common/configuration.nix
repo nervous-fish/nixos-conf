@@ -87,6 +87,7 @@
     android-tools
     anki
     barrier
+    bitwig-studio
     burpsuite
     busybox
     coreutils
