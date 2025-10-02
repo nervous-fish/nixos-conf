@@ -144,7 +144,6 @@
     dash-to-panel
     gtile
     tiling-shell
-    media-controls
   ]);
 
   environment.gnome.excludePackages = (with pkgs; [
