@@ -18,7 +18,7 @@
     };
     supportedFilesystems = [ "ntfs" ];
 
-    kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_16;
+    kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_17;
 
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
     initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
