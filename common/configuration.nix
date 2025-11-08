@@ -132,6 +132,7 @@
     protonvpn-gui
     qpwgraph
     shotcut
+    steam-run
     stremio
     tor-browser-bundle-bin
     unzip
