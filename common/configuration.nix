@@ -60,6 +60,7 @@
     xkb.variant = "ergol";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+    videoDrivers = [ "nvidia" ];
   };
 
   services.mullvad-vpn.enable = true;
@@ -76,6 +77,14 @@
     binfmt = true;
     enable = true;
   };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
+  programs.gamemode.enable = true;
 
   programs.wireshark.enable = true;
 
@@ -109,6 +118,7 @@
     lm_sensors
     logseq
     looking-glass-client
+    mangohud
     mpv
     mullvad-vpn
     nerd-fonts.fira-code
