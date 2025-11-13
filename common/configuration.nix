@@ -61,7 +61,6 @@
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
     videoDrivers = [
-      "modesetting"
       #"amgpu"
       "nvidia"
     ];
@@ -127,7 +126,6 @@
     lm_sensors
     logseq
     looking-glass-client
-    lutris
     mangohud
     mpv
     mullvad-vpn
