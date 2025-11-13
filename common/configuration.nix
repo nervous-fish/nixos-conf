@@ -60,7 +60,11 @@
     xkb.variant = "ergol";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [
+      "modesetting"
+      #"amgpu"
+      "nvidia"
+    ];
   };
 
   services.mullvad-vpn.enable = true;
@@ -78,12 +82,16 @@
     enable = true;
   };
 
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
+    gamescopeSession.enable = true;
   };
-
   programs.gamemode.enable = true;
 
   programs.wireshark.enable = true;
@@ -111,6 +119,7 @@
     google-chrome
     gnome-tweaks
     gparted
+    heroic
     killall
     libratbag
     libreoffice-qt
@@ -118,6 +127,7 @@
     lm_sensors
     logseq
     looking-glass-client
+    lutris
     mangohud
     mpv
     mullvad-vpn

@@ -51,5 +51,11 @@
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.graphics.enable = true;
-  hardware.nvidia.open = false;
+  hardware.nvidia.open = true;
+  # hardware.nvidia.prime = {
+  #   offload.enable = true;
+  #   offload.enableOffloadCmd = true;
+  #   nvidiaBusId = "PCI:1:0:0";
+  #   amdgpuBusId = "PCI:22:0:0";
+  # };
 }
