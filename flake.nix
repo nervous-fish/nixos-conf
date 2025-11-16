@@ -8,30 +8,27 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: let
-    getSpecialArgs = system: {
-      inherit self;
-
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        config.permittedInsecurePackages = [
-          "electron-27.3.11"
-        ];
-      };
-
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
-    };
-  in {
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
     nixosConfigurations = {
-      desktop = let system = "x86_64-linux"; in nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = getSpecialArgs system;
+      desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit self;
+          pkgs-unstable = import nixpkgs-unstable {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+        };
         modules = [
           ./machines/desktop
+
+          {
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.permittedInsecurePackages = [
+              "electron-27.3.11"
+            ];
+          }
+
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -49,18 +46,22 @@
     };
 
     homeConfigurations = {
-      "nervousfish" = let
+      "nervousfish" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
           system = "x86_64-linux";
-          args = getSpecialArgs system;
-      in home-manager.lib.homeManagerConfiguration {
-        pkgs = args.pkgs;
-        modules = [ ./common/users/nervousfish/home ];
-        extraSpecialArgs = args;
+          config.allowUnfree = true;
+        };
+        modules = [
+          ./common/users/nervousfish/home
+        ];
+        extraSpecialArgs = {
+          inherit self;
+          pkgs-unstable = import nixpkgs-unstable {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+        };
       };
     };
   };
 }
-
-
-
-
