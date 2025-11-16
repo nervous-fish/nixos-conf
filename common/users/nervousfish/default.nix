@@ -4,8 +4,7 @@
   users.users.nervousfish = {
     isNormalUser = true;
     description = "nervous-fish";
-    extraGroups = [ "audio" "networkmanager" "wheel" "greeter" "libvirtd" "wireshark" ];
-    packages = with pkgs; [];
+    extraGroups = [ "audio" "networkmanager" "wheel" "greeter" "wireshark" ];
     shell = pkgs.fish;
     openssh = {
       authorizedKeys.keys = [
