@@ -7,7 +7,7 @@
     ../../common/configuration.nix
   ];
 
-  systemd.watchdog.rebootTime = "15s";
+  systemd.settings.Manager.RebootWatchdogSec = "15s";
 
   console.useXkbConfig = true;
 }

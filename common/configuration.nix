@@ -16,7 +16,6 @@
       enable = true;
       interfaces.enp6s0.allowedTCPPorts = [
         22
-        24800 # barrier server
       ];
     };
   };
@@ -30,6 +29,7 @@
       enable = true;
       setSocketVariable = true;
     };
+    liveRestore = false;
   };
 
   security.rtkit.enable = true;
@@ -54,12 +54,13 @@
   };
   services.pulseaudio.enable = false;
 
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
   services.xserver = {
     enable = true;
     xkb.layout = "fr";
     xkb.variant = "ergol";
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
     videoDrivers = [
       #"amgpu"
       "nvidia"
@@ -102,7 +103,6 @@
   environment.systemPackages = (with pkgs; [
     android-tools
     anki
-    barrier
     bitwig-studio
     burpsuite
     busybox
@@ -142,7 +142,7 @@
     shotcut
     steam-run
     stremio
-    tor-browser-bundle-bin
+    tor-browser
     unzip
     virt-manager
     vlc
