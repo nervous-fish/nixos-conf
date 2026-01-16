@@ -137,6 +137,7 @@
     onionshare-gui
     pinta
     piper
+    prismlauncher
     protonvpn-gui
     qpwgraph
     shotcut
