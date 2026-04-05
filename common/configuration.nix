@@ -119,6 +119,8 @@
     gnome-tweaks
     gparted
     heroic
+    jetbrains.pycharm
+    jetbrains-toolbox
     killall
     libratbag
     libreoffice-qt
